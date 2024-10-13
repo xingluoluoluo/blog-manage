@@ -1,7 +1,9 @@
 <!--  -->
 <template>
   <div class="top-title">
-    <yk-title :level="3" style="margin: 0">{{ props.name }}</yk-title>
+    <yk-title :level="3" style="margin: 0; line-height: 36px">{{
+      props.name
+    }}</yk-title>
     <slot name="custom" />
     <yk-space v-if="props.isSearch">
       <yk-button type="secondary" @click="cancelSearch" v-show="searchContent"

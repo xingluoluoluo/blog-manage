@@ -50,7 +50,7 @@ import { navLinks } from '../../utils/menu';
   .router-link-active {
     background: linear-gradient(180deg, #2b5aedde 0%, #2b5aed 100%);
     .yk-icon {
-      color: @bg-color-l;
+      color: @white;
     }
     .yk-text {
       color: @bg-color-l;
