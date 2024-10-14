@@ -1,10 +1,6 @@
 <!--  -->
 <template>
-  <div
-    ref="line-chart"
-    :style="{ height: chartHeight }"
-    class="line-chart"
-  ></div>
+  <div ref="chart" :style="{ height: chartHeight }" class="line-chart"></div>
 </template>
 
 <script lang='ts' setup>
@@ -23,6 +19,7 @@ import { LabelLayout, UniversalTransition } from 'echarts/features'
 // 引入Canvas
 import { CanvasRenderer } from 'echarts/renderers'
 
+// 注册组件
 echarts.use([
   TitleComponent, TooltipComponent, GridComponent, DatasetComponent, TransformComponent, LegendComponent, LineChart, LabelLayout, UniversalTransition, CanvasRenderer
 ])
@@ -38,10 +35,13 @@ const option = ref()
 const formatChart = (data: []) => {
   xAxisD.value = []
   seriesD.value = []
-  data.forEach((item, index) => {
-    xAxisD.value.push(item['date'])
-    seriesD.value.push(item['count'])
-  })
+  if (Array.isArray(data) && data.length > 0) {
+    data.forEach((item) => {
+      xAxisD.value.push(item['date'])
+      seriesD.value.push(item['count'])
+    })
+  }
+
   option.value = {
     color: ['#2B5AED'],
     grid: {

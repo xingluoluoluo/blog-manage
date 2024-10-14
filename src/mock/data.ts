@@ -12,3 +12,14 @@ export const overview = Mock.mock({
     "resourceNum|0-50": 0,
   }
 })
+
+// 访问量数据mock
+export const visit = Mock.mock({
+  "code": 200,
+  "data|30": [
+    {
+      "date": "@datetime('MM-dd')",
+      "count|10-90": 10
+    }
+  ]
+})
