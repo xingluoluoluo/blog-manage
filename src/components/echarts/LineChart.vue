@@ -51,6 +51,9 @@ const formatChart = (data: []) => {
       right: '0%',
       containLabel: true
     },
+    tooltip: {
+      trigger: 'axis'
+    },
     xAxis: {
       type: 'category',
       data: xAxisD.value

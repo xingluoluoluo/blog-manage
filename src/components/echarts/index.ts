@@ -1,2 +1,3 @@
 import LineChart from "./LineChart.vue";
-export { LineChart }
+import PieChart from "./PieChart.vue";
+export { LineChart, PieChart }

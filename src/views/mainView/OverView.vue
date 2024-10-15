@@ -8,8 +8,7 @@
     </TopTitle>
     <Gather />
     <yk-space style="width: 100%">
-      <DataChart />
-      <div style="background-color: aqua; height: 200px">评论</div>
+      <DataChart /><Review style="width: 50%" />
     </yk-space>
   </yk-space>
 </template>
@@ -18,6 +17,7 @@
 import TopTitle from '../../components/frame/TopTitle.vue';
 import Gather from '../../components/content/Gather.vue'
 import DataChart from '../../components/content/DataChart.vue';
+import { Review } from '../../components/comment'
 </script>
 <style lang='less' scoped>
 </style>

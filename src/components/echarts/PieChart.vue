@@ -67,13 +67,13 @@ const formatChart = (data: []) => {
       {
         type: 'pie',
         radius: ['60', '76'],
-        avoidLabelOverlap: true,
+        avoidLabelOverlap: false,
         label: {
           normal: {
-            show: true
+            show: false
           },
           emphasis: {
-            show: true
+            show: false
           }
         },
         emphasis: {
