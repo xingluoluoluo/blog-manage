@@ -7,8 +7,8 @@
     </template> -->
     </TopTitle>
     <Gather />
-    <yk-space style="width: 100%">
-      <DataChart /><Review style="width: 50%" />
+    <yk-space style="width: 100%" size="xl">
+      <DataChart /><Review style="width: 50%" height="515px" />
     </yk-space>
   </yk-space>
 </template>

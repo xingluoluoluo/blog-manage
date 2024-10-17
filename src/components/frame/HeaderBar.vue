@@ -7,7 +7,10 @@
     </yk-space>
     <yk-space align="center" size="xl">
       <yk-badge is-dot>
-        <IconMailOutline style="font-size: 20px" />
+        <IconMailOutline
+          style="font-size: 20px"
+          @click="changeDrawerShow(true)"
+        />
       </yk-badge>
       <yk-avatar
         img-url="https://www.huohuo90.com:3003/user/6353b034dd4b583975e77fbe.png"
@@ -15,18 +18,24 @@
       <div><yk-theme /></div>
       <yk-button>退出</yk-button>
     </yk-space>
+    <PersonalLetter :is-show="isShow" @close="changeDrawerShow(false)" />
   </div>
 </template>
 
 <script lang='ts' setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router';
-
+import { PersonalLetter } from '../comment/index';
 const router = useRouter()
 
 const backHome = () => {
   router.push('/')
 }
+const isShow = ref<boolean>(false)
 
+const changeDrawerShow = (e: boolean) => {
+  isShow.value = e
+}
 </script>
 <style lang='less' scoped>
 .header-bar {
