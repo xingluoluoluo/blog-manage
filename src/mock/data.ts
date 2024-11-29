@@ -74,6 +74,29 @@ export const comment = Mock.mock({
         "criNum|1-19": 0
       }
     ]
+  }
+})
 
+// 文章状态
+export const articleStauts = Mock.mock({
+  "code": 200,
+  "data": [
+    { "id": 0, "publishStatus": '1', "count|0-25": 5 },
+    { "id": 1, "publishStatus": '0', "count|0-25": 3 },
+  ]
+})
+
+// 分组
+export const subset = Mock.mock({
+  "code": 200,
+  "data": {
+    "total": 5,
+    "list|5": [
+      {
+        "id|+1": 0,
+        "subsetName": "@ctitle(2,5)",
+        "count|5-20": 7,
+      }
+    ]
   }
 })

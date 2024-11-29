@@ -15,3 +15,10 @@ export type ItemData = {
   praiseNum: number; // 点赞数
   criNum: number; // 点踩数
 }
+
+// 文章分组
+export type SubsetData = {
+  id: number;
+  subsetName: string;
+  count: number;
+}

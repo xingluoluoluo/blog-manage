@@ -2,6 +2,7 @@
 <template>
   <yk-space size="m" class="item">
     <yk-avatar
+      v-if="isReview"
       img-url="https://www.huohuo90.com:3003/user/6353b034dd4b583975e77fbe.png"
     ></yk-avatar>
     <yk-space dir="vertical" size="s" class="item_main">
@@ -12,7 +13,7 @@
         }}</yk-text>
       </div>
       <yk-text type="secondary">{{ content?.comment }}</yk-text>
-      <yk-space size="s" align="center">
+      <yk-space size="s" align="center" v-if="isReview">
         <yk-tag type="primary">{{ content?.article?.title }}</yk-tag>
         <div>
           <IconLikeFill style="color: red" v-show="content?.praiseNum" /><span

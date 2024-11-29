@@ -10,5 +10,6 @@ export type ItemProps = {
 }
 
 export type PersonalLetterProps = {
+  pageSize: number;
   isShow: boolean
 }

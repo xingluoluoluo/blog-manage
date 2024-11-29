@@ -10,8 +10,12 @@ import Icon from '@yike-design/ui/es/components/svg-icon'
 import router from './router'
 import './style.less'
 
+// 状态管理
+import { createPinia } from 'pinia'
+
+const pinia = createPinia()
 const app = createApp(App)
 
 app.config.globalProperties.$notification = YkNotification
 app.config.globalProperties.$message = YkMessage
-app.use(router).use(Icon).mount('#app')
+app.use(router).use(Icon).use(pinia).mount('#app')
