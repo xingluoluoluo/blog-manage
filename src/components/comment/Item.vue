@@ -30,7 +30,7 @@
       </yk-space>
       <IconDeleteOutline
         class="item_main_delete"
-        @click="deleteItem(props.content.id)"
+        @click.stop="deleteItem(props.content.id)"
       />
     </yk-space>
   </yk-space>

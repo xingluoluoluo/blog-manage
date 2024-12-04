@@ -18,7 +18,18 @@ export type ItemData = {
 
 // 文章分组
 export type SubsetData = {
-  id: number;
-  subsetName: string;
+  id: number | string;
+  subsetName: number | string;
   count: number;
+  createTime?: string;
+}
+
+// 文件信息
+export type FileData = {
+  id: number;
+  fileUrl: string;
+  fileName: string;
+  format: string;//文件格式
+  subsetId?: number;// 所属分组
+  selected?: boolean;// 是否选择
 }

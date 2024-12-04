@@ -9,13 +9,15 @@
         </yk-space>
       </template>
     </TopTitle>
-    <subset></subset>
+    <Subset />
+    <Files />
   </yk-space>
 </template>
 
 <script lang='ts' setup>
 import TopTitle from '../../components/frame/TopTitle.vue';
-import subset from '../../components/subset/subset.vue'
+import Subset from '../../components/subset/subset.vue'
+import Files from '../../components/files/files.vue';
 </script>
 <style lang='less' scoped>
 </style>

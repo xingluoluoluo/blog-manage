@@ -90,13 +90,53 @@ export const articleStauts = Mock.mock({
 export const subset = Mock.mock({
   "code": 200,
   "data": {
-    "total": 5,
+    "total|100-120": 103,
     "list|5": [
       {
         "id|+1": 0,
         "subsetName": "@ctitle(2,5)",
         "count|5-20": 7,
+        "createTime": "@datetime()"
       }
     ]
+  }
+})
+
+// 图片合集
+const pohotos = [
+  'a.jpg',
+  'b.jpg',
+  'c.jpg',
+  'd.jpg',
+  'e.jpg',
+  'f.jpg',
+  'g.jpg',
+  'h.jpg',
+  'i.jpg',
+  'j.jpg',
+  'k.jpg',
+  'l.jpg',
+  'm.jpg',
+  'n.jpg',
+  'o.jpg',
+  'p.jpg',
+  'q.jpg',
+]
+
+
+// 文件数据
+export const file = Mock.mock({
+  "code": 200, // 返回码 200正常，300未通过验证，500网络错误,404
+  "data": {
+    "total": 64,
+    // "currentPage": number,
+    // "pageSize": number,
+    "list|64": [{
+      "id|+1": 0,
+      "fileUrl|1": pohotos,
+      "fileName": "@ctitle(2,12)",
+      "format": "jpeg",//文件格式
+      "subsetId|0-4": 3// 所属分组
+    }]
   }
 })
