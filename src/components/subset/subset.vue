@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="subset">
-    <yk-space>
+    <yk-space wrap>
       <div
         class="subset_item"
         :class="{ subset_item_selected: selectedFlag === '-1all' }"
@@ -43,7 +43,7 @@
         {{ item.subsetName }} {{ item.count }}
       </div>
     </yk-space>
-    <yk-space>
+    <yk-space style="flex: none">
       <yk-popconfirm
         title="请输入分组名称"
         trigger="click"

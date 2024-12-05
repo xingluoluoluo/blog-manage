@@ -13,10 +13,34 @@
         fit="contain"
       ></yk-image>
       <yk-space class="file-item_img_tool">
-        <IconDeleteOutline class="files_tool_delete" />
-        <IconSwitchOutline class="files_tool_switch" />
+        <IconDeleteOutline class="files_tool_delete" @click="deleteFile" />
+        <yk-popconfirm
+          title="请选择分组"
+          placement="bottomRight"
+          @cancel="cancel"
+          @confirm="confirm"
+        >
+          <IconSwitchOutline class="files_tool_switch" />
+          <template #content>
+            <yk-scrollbar
+              ref="scrollbar"
+              height="148px"
+              class="files_scrollbar"
+            >
+              <div
+                class="files_scrollbar_item"
+                v-for="item in subsetStore.data"
+                :key="item.id"
+                :class="{ 'sub-selected': subsetSelectId === item.id }"
+                @click="changeSubset(item.id)"
+              >
+                {{ item.subsetName }} {{ item.count }}
+              </div>
+            </yk-scrollbar>
+          </template>
+        </yk-popconfirm>
       </yk-space>
-      <div class="file-item_img--check">
+      <div class="file-item_img--check" @click="checkFile">
         <IconTickMinOutline style="color: #fff; font-size: 24px" />
       </div>
     </div>
@@ -30,18 +54,48 @@
 </template>
 
 <script lang='ts' setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { FileData } from '../../utils/interface'
+import { useSubsetStore } from '../../store/subset'
+import './files.less'
 
 type FileItemProps = {
   data?: FileData
 }
 const props = withDefaults(defineProps<FileItemProps>(), {})
-
+// store
+const subsetStore = useSubsetStore()
+const emits = defineEmits(['changeSubsetId', 'deleteFile', 'selectFile'])
+//分类选择
+let subsetSelectId = ref<number | string>(props.data?.subsetId!)
+// 切换分组
+const changeSubset = (id: number | string) => {
+  subsetSelectId.value = id
+}
 // 图片路径
 const url = computed(() => {
   return `src/assets/images/${props.data?.fileUrl}`
 })
+
+function cancel() {
+}
+function confirm() {
+  if (subsetSelectId.value != props.data?.subsetId) {
+    let param = {
+      id: props.data?.id,
+      subsetId: subsetSelectId.value
+    }
+    emits('changeSubsetId', param)
+  }
+}
+// 删除单个
+const deleteFile = () => {
+  emits('deleteFile', props.data?.id)
+}
+// 选中单个
+const checkFile = () => {
+  emits('selectFile', props.data?.id)
+}
 </script>
 <style lang='less' scoped>
 .file-item {
@@ -55,7 +109,7 @@ const url = computed(() => {
       position: absolute;
       right: @space-s;
       bottom: @space-s;
-      opacity: 1;
+      opacity: 0;
 
       .yk-icon {
         width: 32px;
@@ -65,11 +119,11 @@ const url = computed(() => {
         border-radius: @radius-m;
         transition: all @animatb;
         cursor: pointer;
-      }
-      &:hover {
-        color: @pcolor;
-        background: rgba(255, 255, 255, 0.72);
-        backdrop-filter: blur(2px);
+        &:hover {
+          color: @pcolor;
+          background: rgba(255, 255, 255, 0.72);
+          backdrop-filter: blur(2px);
+        }
       }
     }
     &--check {
@@ -88,6 +142,7 @@ const url = computed(() => {
       }
     }
     &:hover {
+      width: 204px;
       background: @pcolor-1;
       .file-item_img--check {
         opacity: 1;
@@ -98,6 +153,7 @@ const url = computed(() => {
     }
   }
   &--selected {
+    width: 204px;
     background: @pcolor-1;
     border: 2px solid @pcolor-3;
     .file-item_img--check {
@@ -111,6 +167,7 @@ const url = computed(() => {
       opacity: 0;
     }
     &:hover {
+      width: 204px;
       .file-item_img_tool {
         opacity: 0;
       }
@@ -120,6 +177,7 @@ const url = computed(() => {
     padding-top: @space-l;
     display: flex;
     justify-content: center;
+    user-select: none;
     &_front {
       overflow: hidden;
       display: -webkit-box;

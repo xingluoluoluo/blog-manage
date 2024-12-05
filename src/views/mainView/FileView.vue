@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <yk-space dir="vertical" size="xl" class="local-file">
+  <yk-space dir="vertical" size="xl" class="file-view">
     <TopTitle name="本地文件" :is-search="false">
       <template #custom>
         <yk-space align="center">

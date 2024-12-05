@@ -16,7 +16,11 @@ const routes = [
       },
       {
         path: 'localfile',
-        component: () => import('../views/mainView/LocalFile.vue'),
+        component: () => import('../views/mainView/FileView.vue'),
+      },
+      {
+        path: 'article',
+        component: () => import('../views/mainView/ArticleView.vue'),
       },
       {
         path: 'test',
