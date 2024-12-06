@@ -1,7 +1,7 @@
 <!--  -->
 <template>
-  <yk-space dir="vertical" size="xl" class="file-view">
-    <TopTitle name="本地文件" :is-search="false">
+  <yk-space dir="vertical" size="l" class="file-view">
+    <TopTitle name="本地文件" :is-search="false" style="margin-bottom: 8px">
       <template #custom>
         <yk-space align="center">
           <yk-text type="third">图片、视频、音频大小不超过120M</yk-text>

@@ -140,3 +140,18 @@ export const file = Mock.mock({
     }]
   }
 })
+
+// 标签
+export const labelMock = Mock.mock({
+  "code": 200,
+  "data": {
+    "total|100-120": 103,
+    "list|5": [
+      {
+        "id|+1": 0,
+        "labelName": "@ctitle(2,5)",
+        "createTime": "@datetime()"
+      }
+    ]
+  }
+})

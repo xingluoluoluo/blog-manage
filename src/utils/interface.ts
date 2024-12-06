@@ -33,3 +33,10 @@ export type FileData = {
   subsetId?: number;// 所属分组
   selected?: boolean;// 是否选择
 }
+
+// 标签
+export type LabelData = {
+  id: number | string;
+  labelName: number | string;
+  createTime?: string;
+}
