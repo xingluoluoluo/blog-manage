@@ -40,3 +40,19 @@ export type LabelData = {
   labelName: number | string;
   createTime?: string;
 }
+
+// 文章
+export interface ArticleData {
+  id: number;
+  title: string;
+  subsetId?: number; //区分未分组
+  createTime: Date;// 时间
+  label?: string[]; //标签可能有多个
+  introduce?: string; // 简介
+  coverUrl: string;// 封面地址
+  viewNum: number;// 查看次数
+  publishStatus: number;// 0未发布， 1已发布
+  commentNum: number;// 评论数
+  praiseNum: number; // 点赞数
+  criNum: number; // 点踩数
+}

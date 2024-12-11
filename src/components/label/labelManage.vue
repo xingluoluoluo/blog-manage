@@ -3,8 +3,7 @@
   <div class="label-manage">
     <yk-table>
       <yk-table-column property="index" label="序号"></yk-table-column>
-      <yk-table-column property="subsetName" label="分组名称"></yk-table-column>
-      <yk-table-column property="count" label="关联文章数"></yk-table-column>
+      <yk-table-column property="labelName" label="标签名称"></yk-table-column>
       <yk-table-column property="createTime" label="创建时间"></yk-table-column>
       <yk-table-column
         property="manage"
@@ -13,7 +12,7 @@
       ></yk-table-column>
       <template #tbody>
         <tr
-          v-for="(item, index) in subsetStore.data"
+          v-for="(item, index) in labelData"
           :key="index"
           class="yk-table__row"
         >
@@ -21,16 +20,9 @@
             {{ index + 1 }}
           </td>
           <td class="yk-table__cell">
-            <yk-input
-              v-model="item.subsetName"
-              @focus="focusName(item.id)"
-              @blur="blurName(item.id)"
-            />
+            {{ item.labelName }}
           </td>
 
-          <td class="yk-table__cell">
-            {{ item.count }}
-          </td>
           <td class="yk-table__cell">
             {{ item.createTime }}
           </td>
@@ -38,7 +30,7 @@
             <yk-text
               type="primary"
               style="cursor: pointer"
-              @click="deleteSubset(item.id)"
+              @click="deleteLabel(item.id)"
               >删除</yk-text
             >
           </td>
@@ -49,38 +41,37 @@
 </template>
 
 <script lang='ts' setup>
-import { ref, getCurrentInstance } from 'vue';
-import { useSubsetStore } from '../../store/label'
-// store
-const subsetStore = useSubsetStore()
+import { ref, getCurrentInstance, watch } from 'vue';
+import { LabelData } from '../../utils/interface';
+
+const emits = defineEmits(['deleteLabelE'])
+// 定义props 
+type labelProps = {
+  label: LabelData[]
+}
+const props = withDefaults(defineProps<labelProps>(), {})
+
+// 当前标签
+const labelData = ref<LabelData[]>([])
 
 const proxy: any = getCurrentInstance()?.proxy
 
-let currentName = ref<string | number>('')
-// 名称聚焦
-const focusName = (id: number | string) => {
-  let result = subsetStore.data.find((item: { id: number | string }) => item.id === id)
-  if (result) currentName = result.subsetName
-
-}
-// 名称blur
-const blurName = (id: number | string) => {
-  let result = subsetStore.data.find((item: { id: number | string }) => item.id === id)
-  if (result && currentName != result.subsetName) {
-    // 执行提交操作
-    proxy.$message({ type: 'primary', message: '修改成功' })
-  }
-}
-// 删除分组
-const deleteSubset = (id: number | string) => {
-  subsetStore.data = subsetStore.data.filter((item: { count: number; id: number | string }) => {
-    if (item.id === id) {
-      subsetStore.excludeDivded.count += item.count
-    }
-    return item.id != id
+// 删除标签
+const deleteLabel = (e: number | string) => {
+  labelData.value = labelData.value.filter((item: { id: number | string }) => {
+    return item.id != e
   })
+  emits('deleteLabelE', e)
   proxy.$message({ type: 'primary', message: '删除成功' })
 }
+
+watch(
+  () => props.label,
+  (e) => {
+    labelData.value = [...e]
+  },
+  { immediate: true }
+)
 </script>
 <style lang='less' scoped>
 </style>

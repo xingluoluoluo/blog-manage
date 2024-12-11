@@ -72,12 +72,12 @@ const blurName = (id: number | string) => {
   }
 }
 // 删除分组
-const deleteSubset = (id: number | string) => {
+const deleteSubset = (e: number | string) => {
   subsetStore.data = subsetStore.data.filter((item: { count: number; id: number | string }) => {
-    if (item.id === id) {
+    if (item.id === e) {
       subsetStore.excludeDivded.count += item.count
     }
-    return item.id != id
+    return item.id != e
   })
   proxy.$message({ type: 'primary', message: '删除成功' })
 }

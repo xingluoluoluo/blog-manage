@@ -155,3 +155,26 @@ export const labelMock = Mock.mock({
     ]
   }
 })
+
+// 文章
+export const articleMock = Mock.mock({
+  "code": 200,
+  "data": {
+    "total|40-120": 64,
+    "list|64": [
+      {
+        "id|+1": 0,
+        "title": "@ctitle(2,5)",
+        "createTime": "@datetime()",
+        "label|0-1": ["@ctitle(2,4)"],
+        "introduce": '@cparagraph(1,4)',
+        "coverUrl|1": pohotos,
+        "publishStatus|0-1": 0,
+        "viewNum|10-23": 21,
+        "commentNum|12-33": 21,
+        "praiseNum|11-56": 21,
+        "criNum|12-28": 21,
+      }
+    ]
+  }
+})
