@@ -1,13 +1,13 @@
 <!--  -->
 <template>
-  <yk-space dir="vertical" size="xl" class="article">
-    <ArtilceItem
+  <yk-space dir="vertical" size="xl" class="gallery">
+    <GalleryItem
       v-for="item in articleList"
       :key="item.id"
       :data="item"
       @delete-item="deleteArticle"
       @change-status="changeArticleItem"
-    ></ArtilceItem>
+    ></GalleryItem>
     <div class="article_pagination">
       <yk-pagination
         :total="count"
@@ -19,8 +19,8 @@
 </template>
 
 <script lang='ts' setup>
-import ArtilceItem from './artilceItem.vue';
-import { articleMock } from '../../mock/data'
+import GalleryItem from './galleryItem.vue';
+import { galleryMock } from '../../mock/data'
 import { ArticleData } from '../../utils/interface'
 import { ref, onMounted, getCurrentInstance } from 'vue';
 const proxy: any = getCurrentInstance()?.proxy
@@ -73,7 +73,7 @@ const request: Request = {
 }
 // 获取数据
 const getArticleList = (getTotal: boolean) => {
-  let data = articleMock.data
+  let data = galleryMock.data
   if (getTotal) count.value = data.total
   articleList.value = data.list.slice(
     (request.currentPage - 1) * request.pageSize,
@@ -102,7 +102,7 @@ const changePagination = (e: number) => {
 onMounted(() => { getArticleList(true) })
 </script>
 <style lang='less' scoped>
-.article {
+.gallery {
   &_pagination {
     padding: @space-s 0 @space-xl;
     display: flex;

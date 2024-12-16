@@ -45,7 +45,7 @@ export type LabelData = {
 export interface ArticleData {
   id: number;
   title: string;
-  subsetId?: number; //区分未分组
+  subsetId?: number | string; //区分未分组
   createTime: Date;// 时间
   label?: string[]; //标签可能有多个
   introduce?: string; // 简介

@@ -23,6 +23,10 @@ const routes = [
         component: () => import('../views/mainView/ArticleView.vue'),
       },
       {
+        path: 'gallery',
+        component: () => import('../views/mainView/GalleryView.vue'),
+      },
+      {
         path: 'test',
         component: () => import('../views/mainView/test.vue'),
       },
