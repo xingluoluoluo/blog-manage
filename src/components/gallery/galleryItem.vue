@@ -1,89 +1,85 @@
 <!--  -->
 <template>
-  <div class="article-item">
-    <yk-space size="xl">
-      <div class="article-item_cover">
-        <yk-image
-          fit="cover"
-          width="160"
-          height="120"
-          :src="url"
-          :isLazy="true"
-          :preview="false"
-        />
-        <p
-          class="article-item_unpublish"
-          v-if="props.data?.publishStatus === 0"
-        >
-          未发布
-        </p>
+  <div class="gallery-item">
+    <yk-space size="s" dir="vertical">
+      <div class="gallery-item-content">
+        <div class="gallery-item_cover">
+          <yk-image
+            fit="cover"
+            width="238"
+            height="120"
+            :src="url"
+            :isLazy="true"
+            :preview="false"
+          />
+        </div>
+        <yk-space :size="2">
+          <div class="gallery-item-content--left image-div">
+            <yk-image
+              fit="cover"
+              width="78"
+              height="78"
+              :src="'src/assets/images/' + props.data.content?.[0]"
+              :isLazy="true"
+              :preview="false"
+              v-if="props.data?.content?.[0]"
+            />
+          </div>
+          <div class="gallery-item-content--center image-div">
+            <yk-image
+              fit="cover"
+              width="78"
+              height="78"
+              :src="'src/assets/images/' + props.data.content?.[1]"
+              :isLazy="true"
+              :preview="false"
+              v-if="props.data?.content?.[1]"
+            />
+          </div>
+          <div class="gallery-item-content--right image-div">
+            <yk-image
+              fit="cover"
+              width="78"
+              height="78"
+              :src="'src/assets/images/' + props.data.content?.[2]"
+              :isLazy="true"
+              :preview="false"
+              v-if="props.data?.content?.[2]"
+            />
+          </div>
+        </yk-space>
+        <yk-space class="gallery-item_bottom_right" :size="4">
+          <IconFillOutline />
+          <yk-popconfirm
+            trigger="click"
+            placement="topRight"
+            title="确定删除"
+            content="删除将不可恢复"
+            @confirm="deleteItem"
+          >
+            <IconDeleteOutline />
+          </yk-popconfirm>
+        </yk-space>
       </div>
+
       <div style="width: 100%">
-        <p class="article-item_title">{{ props.data?.title }}</p>
-        <p class="article-item_introduce">{{ props.data?.introduce }}</p>
-        <div class="article-item_bottom">
+        <p class="gallery-item_title">{{ props.data?.title }}</p>
+        <div class="gallery-item_bottom">
           <yk-space size="xl">
-            <yk-text type="secondary">
-              {{ subsetStore.subsetName(props.data?.subsetId) }}
-              <yk-text
-                type="secondary"
-                v-if="props.data?.label && props.data?.label?.length > 0"
-              >
-                /
-                <span
-                  v-for="(item, index) in props.data?.label"
-                  :key="index"
-                  style="padding-right: 4px"
-                  >{{ item }}
-                </span>
-              </yk-text>
-            </yk-text>
-            <yk-text type="third">
-              {{ momentFunc(props.data.createTime) }}
-            </yk-text>
             <yk-space>
-              <yk-text type="third">
-                <IconEyeOutline /> {{ props.data.viewNum }}
-              </yk-text>
-              <yk-text type="third">
-                <IconLikeOutline /> {{ props.data.praiseNum }}
-              </yk-text>
-              <yk-text type="third">
+              <yk-text type="third"> 查看 {{ props.data.viewNum }} </yk-text>
+              <yk-text type="third"> 喜欢 {{ props.data.praiseNum }} </yk-text>
+              <!-- <yk-text type="third">
                 <IconCommentOutline /> {{ props.data.commentNum }}
               </yk-text>
               <yk-text type="third">
                 <IconCrossOutline /> {{ props.data.criNum }}
-              </yk-text>
+              </yk-text> -->
             </yk-space>
           </yk-space>
-          <yk-space size="xl" class="article-item_bottom_right">
-            <yk-tooltip
-              placement="top"
-              title="发布"
-              v-if="props.data.publishStatus === 0"
-            >
-              <IconSendOutline @click="changeStatus" />
-            </yk-tooltip>
-            <yk-tooltip
-              placement="top"
-              title="撤回"
-              v-if="props.data.publishStatus === 1"
-            >
-              <IconRevokeOutline @click="changeStatus" />
-            </yk-tooltip>
-            <yk-tooltip placement="top" title="编辑">
-              <IconFillOutline />
-            </yk-tooltip>
-            <yk-popconfirm
-              trigger="click"
-              placement="topRight"
-              title="确定删除"
-              content="删除将不可恢复"
-              @confirm="deleteItem"
-            >
-              <IconDeleteOutline />
-            </yk-popconfirm>
-          </yk-space>
+          <yk-text type="third">
+            {{ momentFunc(props.data.createTime) }}
+          </yk-text>
         </div>
       </div>
     </yk-space>
@@ -97,8 +93,7 @@ import { useSubsetStore } from '../../store/subset'
 import { momentFunc } from '../../utils/moment'
 
 // const proxy: any = getCurrentInstance()?.proxy
-// store
-const subsetStore = useSubsetStore()
+
 type ArticleItemProps = {
   data: ArticleData
 }
@@ -113,23 +108,40 @@ const url = computed(() => {
 const deleteItem = () => {
   emits('deleteItem', props.data.id)
 }
-// 改变状态
-const changeStatus = () => {
-  emits('changeStatus', { id: props.data.id, publishStatus: props.data.publishStatus })
-}
+
 </script>
 <style lang='less' scoped>
-.article-item {
-  width: 100%;
+.gallery-item {
+  width: 238px;
   border-radius: @radius-m;
   background: @bg-color-l;
-  padding: @space-xl;
+
   &_cover {
     position: relative;
-    border-radius: @radius-m;
+    border-radius: @radius-m @radius-m 0 0;
+    padding-bottom: 2px;
     overflow: hidden;
-    width: 160px;
     flex: none;
+  }
+  &-content {
+    &--left {
+      border-radius: 0 0 0 @radius-m;
+      overflow: hidden;
+    }
+    &--right {
+      border-radius: 0 0 @radius-m 0;
+      overflow: hidden;
+    }
+    .image-div {
+      width: 78px;
+      height: 78px;
+      background: @gray-2;
+    }
+    &:hover {
+      .gallery-item_bottom_right {
+        opacity: 1;
+      }
+    }
   }
   &_unpublish {
     position: absolute;
@@ -142,9 +154,13 @@ const changeStatus = () => {
     font-weight: 600;
   }
   &_title {
-    font-size: 20px;
+    font-size: @size-l;
     font-weight: 600;
-    padding-bottom: @space-s;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
   }
   &_introduce {
     height: 48px;
@@ -163,10 +179,22 @@ const changeStatus = () => {
     justify-content: space-between;
     align-items: center;
     &_right {
+      position: absolute;
+      right: @space-l;
+      top: @space-l;
+      background-color: rgba(255, 255, 255, 0.56);
+      border-radius: @radius-m;
+      padding: @space-ss;
+      opacity: 0;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.64);
+        backdrop-filter: blur(2px);
+      }
       .yk-icon {
-        width: 20px;
-        height: 20px;
-        color: @font-color-s;
+        width: 24px;
+        height: 24px;
+        padding: 5px;
+        color: @gray;
         cursor: pointer;
         &:hover {
           color: @pcolor;
@@ -174,5 +202,10 @@ const changeStatus = () => {
       }
     }
   }
+}
+</style>
+<style lang="less">
+.yk-image {
+  border-radius: 0;
 }
 </style>

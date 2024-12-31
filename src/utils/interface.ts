@@ -55,4 +55,5 @@ export interface ArticleData {
   commentNum: number;// 评论数
   praiseNum: number; // 点赞数
   criNum: number; // 点踩数
+  content?: string | string[]; // 图库
 }

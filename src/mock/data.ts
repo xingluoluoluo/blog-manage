@@ -1,5 +1,30 @@
 import Mock from 'mockjs'
 const Random = Mock.Random
+
+// 图片合集
+const pohotos = [
+  'a.jpg',
+  'b.jpg',
+  'c.jpg',
+  'd.jpg',
+  'e.jpg',
+  'f.jpg',
+  'g.jpg',
+  'h.jpg',
+  'i.jpg',
+  'j.jpg',
+  'k.jpg',
+  'l.jpg',
+  'm.jpg',
+  'n.jpg',
+  'o.jpg',
+  'p.jpg',
+  'q.jpg',
+]
+
+const pohotoArr = [
+  ["a.jpg"], ["d.jpg", "e.jpg"], ["c.jpg", "f.jpg", "d.jpg",], ["e.jpg", "g.jpg", "j.jpg",], ["n.jpg", "m.jpg", "o.jpg"], ["p.jpg", "q.jpg"],
+]
 // 总览数据
 export const overview = Mock.mock({
   "code": 200, // 返回码 200正常，300未通过验证，500网络错误,404
@@ -102,26 +127,7 @@ export const subset = Mock.mock({
   }
 })
 
-// 图片合集
-const pohotos = [
-  'a.jpg',
-  'b.jpg',
-  'c.jpg',
-  'd.jpg',
-  'e.jpg',
-  'f.jpg',
-  'g.jpg',
-  'h.jpg',
-  'i.jpg',
-  'j.jpg',
-  'k.jpg',
-  'l.jpg',
-  'm.jpg',
-  'n.jpg',
-  'o.jpg',
-  'p.jpg',
-  'q.jpg',
-]
+
 
 
 // 文件数据
@@ -193,7 +199,7 @@ export const galleryMock = Mock.mock({
         "label|0-1": ["@ctitle(2,4)"],
         "introduce": '@cparagraph(2,4)',
         "coverUrl|1": pohotos,
-        "publishStatus|0-1": 0,
+        "content|1": pohotoArr,
         "viewNum|10-23": 21,
         "commentNum|12-33": 21,
         "praiseNum|11-56": 21,

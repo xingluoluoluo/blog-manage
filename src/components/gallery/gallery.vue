@@ -1,21 +1,26 @@
 <!--  -->
 <template>
-  <yk-space dir="vertical" size="xl" class="gallery">
-    <GalleryItem
-      v-for="item in articleList"
-      :key="item.id"
-      :data="item"
-      @delete-item="deleteArticle"
-      @change-status="changeArticleItem"
-    ></GalleryItem>
-    <div class="article_pagination">
+  <div class="gallery">
+    <div class="gallery-content">
+      <div class="gallery-content_files">
+        <GalleryItem
+          v-for="item in articleList"
+          :key="item.id"
+          :data="item"
+          @delete-item="deleteArticle"
+          @change-status="changeArticleItem"
+        ></GalleryItem>
+      </div>
+    </div>
+
+    <div class="gallery_pagination">
       <yk-pagination
         :total="count"
         size="m"
         @change="changePagination"
       ></yk-pagination>
     </div>
-  </yk-space>
+  </div>
 </template>
 
 <script lang='ts' setup>
@@ -27,7 +32,7 @@ const proxy: any = getCurrentInstance()?.proxy
 const props = defineProps({
   pageSize: {
     type: Number,
-    default: 4
+    default: 7
   },
   subsetId: { // 所属分组
     type: Number,
@@ -103,8 +108,21 @@ onMounted(() => { getArticleList(true) })
 </script>
 <style lang='less' scoped>
 .gallery {
+  background: @bg-color-l;
+  padding: 32px 24px 24px;
+  border-radius: @radius-m;
+  &-content {
+    display: inline;
+    &_files {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 238px);
+      row-gap: 32px;
+      column-gap: 24px;
+      justify-content: center;
+    }
+  }
   &_pagination {
-    padding: @space-s 0 @space-xl;
+    padding: @space-s 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;
