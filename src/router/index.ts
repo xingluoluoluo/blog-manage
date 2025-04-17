@@ -27,6 +27,10 @@ const routes = [
         component: () => import('../views/mainView/GalleryView.vue'),
       },
       {
+        path: 'diary',
+        component: () => import('../views/mainView/DiaryView.vue'),
+      },
+      {
         path: 'test',
         component: () => import('../views/mainView/test.vue'),
       },

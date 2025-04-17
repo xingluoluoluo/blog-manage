@@ -89,7 +89,6 @@
 <script lang='ts' setup>
 import { computed, getCurrentInstance } from 'vue';
 import { ArticleData } from '../../utils/interface'
-import { useSubsetStore } from '../../store/subset'
 import { momentFunc } from '../../utils/moment'
 
 // const proxy: any = getCurrentInstance()?.proxy
